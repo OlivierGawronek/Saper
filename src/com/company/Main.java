@@ -43,15 +43,15 @@ public class Main {
         if(!plansza[x][y].getCzyJestOdkryte()){ plansza[x][y].odkryjPole();}
         if(plansza[x][y].getIloscMin() != 0) {return;}
         if(x<0 || x > 8 || y <0 || y >8){return;}
-        odkrywaniePol(x-1,y-1);
         odkrywaniePol(x-1,y);
+        odkrywaniePol(x+1,y);
+        odkrywaniePol(x,y-1);
+        odkrywaniePol(x,y+1);
+        odkrywaniePol(x-1,y-1);
         odkrywaniePol(x-1,y+1);
         odkrywaniePol(x+1,y-1);
-        odkrywaniePol(x+1,y);
         odkrywaniePol(x+1,y+1);
-        odkrywaniePol(x,y-1);
         odkrywaniePol(x,y);
-        odkrywaniePol(x,y+1);
     }
 
     public static void LosowanieMin(int x, int y) {
