@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -53,7 +54,7 @@ public class Main {
         odkrywaniePol(x,y+1);
     }
 
-    public static void LosowanieMin() {
+    public static void LosowanieMin(int x, int y) {
         // x, y - wspolrzedne miejsca w ktore sie kliknie zamienione odpowiednio
         int licznik = 0;
         Random rand = new Random();
@@ -62,21 +63,32 @@ public class Main {
         while (licznik < 10) {
             tempx = rand.nextInt(9);
             tempy = rand.nextInt(9);
-            if((tempx != 5 || tempy != 5) && plansza[tempx][tempy].getCzyJestMina() == false) {
+            if((tempx != x || tempy != y) && plansza[tempx][tempy].getCzyJestMina() == false) {
                 plansza[tempx][tempy].setCzyJestMina(true);
                 licznik++;
             }
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        LosowanieMin();
-        /*for (int i = 0; i < 9; i++) {
+    public static void UtworzeniePolPlanszy() {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if(plansza[j][i].getCzyJestMina() == true) {
-                    System.out.println(".");
-                }
+                plansza[i][j] = new Pole(false);
             }
-        } */
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        JFrame saper = new JFrame();
+        Panel panel = new Panel();
+        saper.add(panel);
+        panel.setSize(1000, 1000);
+        saper.setTitle("Warcaby");
+        saper.setBounds(560, 100, 1000 + 16, 1000 + 16 + 23);
+        saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        saper.setVisible(true);
+        saper.setResizable(false);
+
+        UtworzeniePolPlanszy();
     }
 }
