@@ -37,6 +37,22 @@ public class Main {
             out.close();
         }
     }
+    public static void odkrywaniePol(int x, int y)
+    {
+        if(plansza[x][y].getCzyJestOdkryte()) {return;}
+        if(!plansza[x][y].getCzyJestOdkryte()){ plansza[x][y].odkryjPole();}
+        if(plansza[x][y].getIloscMin() != 0) {return;}
+        if(x<0 || x > 8 || y <0 || y >8){return;}
+        odkrywaniePol(x-1,y-1);
+        odkrywaniePol(x-1,y);
+        odkrywaniePol(x-1,y+1);
+        odkrywaniePol(x+1,y-1);
+        odkrywaniePol(x+1,y);
+        odkrywaniePol(x+1,y+1);
+        odkrywaniePol(x,y-1);
+        odkrywaniePol(x,y);
+        odkrywaniePol(x,y+1);
+    }
 
     public static void LosowanieMin() {
         // x, y - wspolrzedne miejsca w ktore sie kliknie zamienione odpowiednio
