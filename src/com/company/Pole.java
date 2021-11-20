@@ -1,5 +1,7 @@
 package com.company;
 
+import static com.company.Main.*;
+
 public class Pole {
 
     private int iloscMin = 0;
