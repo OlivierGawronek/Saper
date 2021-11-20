@@ -45,7 +45,7 @@ public class Panel extends JPanel implements MouseListener {
 
 
         Miny(g);
-        tworzeniFlag(g);
+        tworzenieFlag(g);
 
         repaint();
     }
@@ -58,12 +58,14 @@ public class Panel extends JPanel implements MouseListener {
         repaint();
     }
 
-    public void tworzeniFlag(Graphics g)
+    public void tworzenieFlag(Graphics g)
     {
-        if(plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
+        if(!plansza[myszkaX][myszkaY].getCzyJestFlaga() && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && !plansza[myszkaX][myszkaY].getCzyJestMina()) {
             g.drawImage(flaga.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
             //System.out.println("PRAWY");
             rightClick = !rightClick;
+            plansza[myszkaX][myszkaY].zmienFlage();
+            repaint();
         }
     }
 
