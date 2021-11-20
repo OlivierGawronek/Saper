@@ -14,12 +14,10 @@ public class Pole {
         this.czyJestMina = czyJestMina;
     }
 
-    public static Boolean czyPoleIstnieje(int x, int y)
-    { if (x >= 0 && x < szerokoscPlanszy && y >= 0 && y < wysokoscPlanszy){
-        return true;
-    }else{
-        return false;
-    }}
+    public Boolean czyPoleIstnieje(int x, int y) {
+        if (x >= 0 && x < szerokoscPlanszy && y >= 0 && y < wysokoscPlanszy) return true;
+        else return false;
+    }
 
     public int getIloscMin() {
         return iloscMin;

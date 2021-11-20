@@ -25,6 +25,10 @@ public class Panel extends JPanel implements MouseListener {
     static int myszkaX = 0;
     static int myszkaY = 0;
 
+    static boolean pierwRuch = true;
+    static boolean Gra = false;
+    static boolean rightClick = false;
+
     public Panel(){
         addMouseListener(this);
     }
@@ -32,14 +36,36 @@ public class Panel extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (int i = 0; i < wysokoscPlanszy; i++) {
-            for (int j = 0; j < szerokoscPlanszy; j++) {
-                g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+            for (int i = 0; i < wysokoscPlanszy; i++) {
+                for (int j = 0; j < szerokoscPlanszy; j++) {
+                    //if(plansza[j][i].getCzyJestMina()) g.drawImage(mina.getImage(), j* wielkoscKomorki, i * wielkoscKomorki, null);
+                    g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                }
             }
-        }
+
+
+        Miny(g);
+        tworzeniFlag(g);
+
+        repaint();
     }
 
 
+    public void Miny(Graphics g)
+    {
+        if (plansza[myszkaX][myszkaY].getCzyJestMina())
+            g.drawImage(mina.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
+        repaint();
+    }
+
+    public void tworzeniFlag(Graphics g)
+    {
+        if(plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
+            g.drawImage(flaga.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
+            //System.out.println("PRAWY");
+            rightClick = !rightClick;
+        }
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -48,6 +74,19 @@ public class Panel extends JPanel implements MouseListener {
 
         if(myszkaX > szerokoscPlanszy - 1) myszkaX = szerokoscPlanszy-1;
         if(myszkaY > wysokoscPlanszy - 1) myszkaY = wysokoscPlanszy-1;
+
+        if(pierwRuch)
+        {
+            Gra = true;
+            LosowanieMin(myszkaX, myszkaY);
+            pierwRuch = !pierwRuch;
+        }
+
+        if (SwingUtilities.isRightMouseButton(e)) {
+            rightClick = true;
+        }
+
+
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
     }

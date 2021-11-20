@@ -46,7 +46,7 @@ public class Main {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
         if(!plansza[x][y].getCzyJestOdkryte()){ plansza[x][y].odkryjPole();}
         if(plansza[x][y].getIloscMin() != 0) {return;}
-        if(x<0 || x > 8 || y <0 || y >8){return;}
+        if(!plansza[x][y].czyPoleIstnieje(x, y)){return;}
         odkrywaniePol(x-1,y);
         odkrywaniePol(x+1,y);
         odkrywaniePol(x,y-1);
@@ -87,12 +87,21 @@ public class Main {
         Panel panel = new Panel();
         saper.add(panel);
         panel.setSize(szerokoscPlanszy*wielkoscKomorki, (wysokoscPlanszy+1)*wielkoscKomorki);
-        saper.setTitle("Warcaby");
+        saper.setTitle("Saper");
         saper.setBounds(560, 100, szerokoscPlanszy * wielkoscKomorki + 16, (wysokoscPlanszy + 1) * wielkoscKomorki + 16 + 23);
         saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         saper.setVisible(true);
         saper.setResizable(false);
 
         UtworzeniePolPlanszy();
+
+        /*
+        for (int i = 0; i < szerokoscPlanszy; i++) {
+            for (int j = 0; j < wysokoscPlanszy; j++) {
+                LosowanieMin(i, j);
+            }
+        }
+        */
+
     }
 }
