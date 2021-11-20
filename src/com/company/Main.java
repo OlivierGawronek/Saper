@@ -9,10 +9,14 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static Pole[][] plansza = new Pole[9][9];
+
     public static int szerokoscPlanszy = 9;
     public static int wysokoscPlanszy = 9;
     public static int iloscMin = 10;
+    public static int wielkoscKomorki = 30;
+
+    public static Pole[][] plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
+
     public static long StartTime;
     public static long EndTime;
     public static long TimeDifference;
@@ -60,9 +64,9 @@ public class Main {
         Random rand = new Random();
         int tempx = 0;
         int tempy = 0;
-        while (licznik < 10) {
-            tempx = rand.nextInt(9);
-            tempy = rand.nextInt(9);
+        while (licznik < iloscMin) {
+            tempx = rand.nextInt(szerokoscPlanszy);
+            tempy = rand.nextInt(wysokoscPlanszy);
             if((tempx != x || tempy != y) && plansza[tempx][tempy].getCzyJestMina() == false) {
                 plansza[tempx][tempy].setCzyJestMina(true);
                 licznik++;
@@ -71,8 +75,8 @@ public class Main {
     }
 
     public static void UtworzeniePolPlanszy() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < szerokoscPlanszy; i++) {
+            for (int j = 0; j < wysokoscPlanszy; j++) {
                 plansza[i][j] = new Pole(false);
             }
         }
@@ -82,9 +86,9 @@ public class Main {
         JFrame saper = new JFrame();
         Panel panel = new Panel();
         saper.add(panel);
-        panel.setSize(1000, 1000);
+        panel.setSize(szerokoscPlanszy*wielkoscKomorki, (wysokoscPlanszy+1)*wielkoscKomorki);
         saper.setTitle("Warcaby");
-        saper.setBounds(560, 100, 1000 + 16, 1000 + 16 + 23);
+        saper.setBounds(560, 100, szerokoscPlanszy * wielkoscKomorki + 16, (wysokoscPlanszy + 1) * wielkoscKomorki + 16 + 23);
         saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         saper.setVisible(true);
         saper.setResizable(false);

@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
+import static com.company.Main.*;
 
 public class Panel extends JPanel implements MouseListener {
 
@@ -20,27 +20,21 @@ public class Panel extends JPanel implements MouseListener {
     ImageIcon flaga = new ImageIcon("src/Grafika/flaga.png");
     ImageIcon mina = new ImageIcon("src/Grafika/mina.png");
     ImageIcon odkrytePole = new ImageIcon("src/Grafika/odkryte_pole.png");
-    ImageIcon Pole = new ImageIcon("src/Grafika/pole.png");
+    ImageIcon pole = new ImageIcon("src/Grafika/pole.png");
 
-    static int x = 0;
-    static int y = 0;
-
-    static int PoleWielkoscX = 8;
-    static int PoleWielkoscY = 8;
+    static int myszkaX = 0;
+    static int myszkaY = 0;
 
     public Panel(){
         addMouseListener(this);
     }
 
-    public static int wielkoscKomorki = 30;
-
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                g.drawImage(Pole.getImage(), j * 30, i * 30, null);
+        for (int i = 0; i < wysokoscPlanszy; i++) {
+            for (int j = 0; j < szerokoscPlanszy; j++) {
+                g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
             }
         }
     }
@@ -49,13 +43,13 @@ public class Panel extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        x = e.getX()/wielkoscKomorki;
-        y = e.getY()/wielkoscKomorki;
+        myszkaX = e.getX()/wielkoscKomorki;
+        myszkaY = e.getY()/wielkoscKomorki;
 
-        if(x > PoleWielkoscX) x = PoleWielkoscX;
-        if(y > PoleWielkoscY) y = PoleWielkoscY;
+        if(myszkaX > szerokoscPlanszy - 1) myszkaX = szerokoscPlanszy-1;
+        if(myszkaY > wysokoscPlanszy - 1) myszkaY = wysokoscPlanszy-1;
 
-        System.out.println("x: " + x + " y: " + y);
+        System.out.println("x: " + myszkaY + " y: " + myszkaY);
     }
 
     @Override
