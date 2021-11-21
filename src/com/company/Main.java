@@ -71,7 +71,7 @@ public class Main {
     public static void LosowanieMin(int x, int y) {
         // x, y - wspolrzedne miejsca w ktore sie kliknie zamienione odpowiednio
         int licznik = 0;
-        Random rand = new Random(1);
+        Random rand = new Random();
         int tempx = 0;
         int tempy = 0;
         while (licznik < iloscMin) {
@@ -99,9 +99,8 @@ public class Main {
     {
         for (int i = -1; i <=1; i++) {
             for (int j = -1; j <=1; j++) {
-                if(Pole.czyPoleIstnieje(x+i, y+j))
-                    if (!(i == 0 && j == 0))
-                    plansza[x+i][y+j].zmiekszIloscMin();
+                if(Pole.czyPoleIstnieje(x+i, y+j) && !plansza[x+i][y+j].getCzyJestMina() && !(i == 0 && j == 0))
+                    plansza[x+i][y+j].zwiekszIloscMin();
             }
         }
     }

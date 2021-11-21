@@ -37,15 +37,11 @@ public class Panel extends JPanel implements MouseListener {
         super.paintComponent(g);
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
-                    //g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                    if (!wyswietlPola(i,j,g))
                     wyswietlFLagiMiny(i,j,g);
+                    wyswietlPola14(i,j,g);
+                    wyswietlPola58(i,j,g);
                 }
             }
-
-        //Miny(g);
-            //testodk(myszkaX,myszkaY,g);
-        //tworzenieFlag(g);
         repaint();
     }
     /*
@@ -63,27 +59,24 @@ public class Panel extends JPanel implements MouseListener {
 
     public void wyswietlFLagiMiny(int i, int j, Graphics g)
     {
-        if(plansza[i][j].getCzyJestMina())
+        if(plansza[j][i].getCzyJestMina())
         {
             g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
             return;
         }
-        if(plansza[i][j].getCzyJestFlaga())
+        if(plansza[j][i].getCzyJestFlaga())
         {
             g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
             return;
         }
-        if(!plansza[i][j].getCzyJestOdkryte())
+        if(!plansza[j][i].getCzyJestOdkryte())
         {
             g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
         }
     }
 
-    public Boolean wyswietlPola(int i, int j, Graphics g) {
+    public Boolean wyswietlPola14(int i, int j, Graphics g) {
         switch (plansza[j][i].getIloscMin()) {
-            /* 0:
-                g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;*/
             case 1:
                 g.drawImage(num1.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 return true;
@@ -96,6 +89,12 @@ public class Panel extends JPanel implements MouseListener {
             case 4:
                 g.drawImage(num4.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 return true;
+        }
+        return false;
+    }
+
+    public Boolean wyswietlPola58(int i, int j, Graphics g) {
+        switch (plansza[j][i].getIloscMin()) {
             case 5:
                 g.drawImage(num5.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 return true;
@@ -108,8 +107,6 @@ public class Panel extends JPanel implements MouseListener {
             case 8:
                 g.drawImage(num8.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 return true;
-            default:
-                break;
         }
         return false;
     }
@@ -144,8 +141,10 @@ public class Panel extends JPanel implements MouseListener {
             LosowanieMin(myszkaX, myszkaY);
             obliczanieWartosci();
             pierwRuch = false;
+
         }
 
+        plansza[myszkaX][myszkaY].odkryjPole();
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
     }

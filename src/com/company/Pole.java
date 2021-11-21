@@ -27,7 +27,7 @@ public class Pole {
         this.iloscMin = iloscMin;
     }
 
-    public void zmiekszIloscMin()
+    public void zwiekszIloscMin()
     {
         iloscMin++;
     }
