@@ -48,8 +48,8 @@ public class Main {
         if(!plansza[x][y].czyPoleIstnieje(x, y)){return;}
 
         if(x<0 || x > szerokoscPlanszy || y < 0 || y >wysokoscPlanszy){return;}
-        /*
->>>>>>> ca4a230 (poprawa metody grupa 2)
+
+
         odkrywaniePol(x-1,y);
         odkrywaniePol(x+1,y);
         odkrywaniePol(x,y-1);
@@ -58,13 +58,14 @@ public class Main {
         odkrywaniePol(x-1,y+1);
         odkrywaniePol(x+1,y-1);
         odkrywaniePol(x+1,y+1);
-         */
+       /*
         for (int i = -1; i <=1; i++) {
             for (int j = -1; j <=1; j++) {
                 if(x== 0 && y ==0) continue;
                 odkrywaniePol(x+i,y+j);
             }
         }
+        */
     }
 
     public static void LosowanieMin(int x, int y) {
@@ -76,12 +77,34 @@ public class Main {
         while (licznik < iloscMin) {
             tempx = rand.nextInt(szerokoscPlanszy);
             tempy = rand.nextInt(wysokoscPlanszy);
-            if((tempx != x || tempy != y) && plansza[tempx][tempy].getCzyJestMina() == false) {
+            if((tempx != x || tempy != y) && !plansza[tempx][tempy].getCzyJestMina()) {
                 plansza[tempx][tempy].setCzyJestMina(true);
                 licznik++;
             }
         }
     }
+
+    public static void obliczanieWartosci()
+    {
+        for (int i = 0; i < szerokoscPlanszy; i++) {
+            for (int j = 0; j < wysokoscPlanszy; j++) {
+                if(plansza[i][j].getCzyJestMina())
+                {
+                    zwiekszenieWartosci(i,j);
+                }
+            }
+        }
+    }
+    public static void zwiekszenieWartosci(int x, int y)
+    {
+        for (int i = -1; i <=1; i++) {
+            for (int j = -1; j <=1; j++) {
+                if(Pole.czyPoleIstnieje(x+i, y+j))
+                plansza[x+i][y+j].setIloscMin(plansza[x+i][y+j].getIloscMin()+1);
+            }
+        }
+    }
+
 
     public static void UtworzeniePolPlanszy() {
         for (int i = 0; i < szerokoscPlanszy; i++) {
@@ -101,8 +124,8 @@ public class Main {
         saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         saper.setVisible(true);
         saper.setResizable(false);
-
         UtworzeniePolPlanszy();
+
 
         /*
         for (int i = 0; i < szerokoscPlanszy; i++) {

@@ -37,16 +37,61 @@ public class Panel extends JPanel implements MouseListener {
         super.paintComponent(g);
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
-                    g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                    //g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                    wyswietlPola(i,j,g);
+                    wyswietlFLagiMiny(i,j,g);
                 }
             }
 
-        Miny(g);
+        //Miny(g);
+            //testodk(myszkaX,myszkaY,g);
         //tworzenieFlag(g);
-
         repaint();
     }
+    /*
+    public void testodk(int x, int y, Graphics g) {
+        for (int i = -1; i <=1; i++) {
+            for (int j = -1; j <=1; j++) {
+                if(x== 0 && y ==0) continue;
+                if(plansza[x+i][y+j].getIloscMin() == 0)
+                    g.drawImage(odkrytePole.getImage(), (x+i) * wielkoscKomorki, (y+j) * wielkoscKomorki, null);
+                    testodk(x+i,y+j,g);
+            }
+        }
+    }
+     */
 
+    public void wyswietlFLagiMiny(int i, int j, Graphics g)
+    {
+        if(!plansza[i][j].getCzyJestOdkryte())
+        {
+            g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+        }
+        if(plansza[i][j].getCzyJestMina())
+        {
+            g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+        }
+        if(plansza[i][j].getCzyJestFlaga())
+        {
+            g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+        }
+    }
+
+    public void wyswietlPola(int i, int j, Graphics g) {
+        switch (plansza[i][j].getIloscMin()) {
+            case 0:
+                g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                break;
+            case 1:
+                g.drawImage(num1.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                break;
+            case 2:
+                g.drawImage(num2.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                break;
+            default:
+                break;
+        }
+    }
 
     public void Miny(Graphics g)
     {
@@ -76,7 +121,8 @@ public class Panel extends JPanel implements MouseListener {
         {
             Gra = true;
             LosowanieMin(myszkaX, myszkaY);
-            pierwRuch = !pierwRuch;
+            obliczanieWartosci();
+            pierwRuch = false;
         }
 
 
