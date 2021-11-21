@@ -37,85 +37,53 @@ public class Panel extends JPanel implements MouseListener {
         super.paintComponent(g);
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
-                    wyswietlFLagiMiny(i,j,g);
-                    wyswietlPola14(i,j,g);
-                    wyswietlPola58(i,j,g);
+                    g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                    if (plansza[j][i].getCzyJestOdkryte()) {
+                        g.drawImage(odkrytePole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                        wyswietlPola14(i, j, g);
+                        wyswietlPola58(i, j, g);
+                    }
+                    else if (plansza[j][i].getCzyJestFlaga())
+                        g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                    if (!Gra && !pierwRuch && plansza[j][i].getCzyJestMina())
+                        g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 }
             }
         repaint();
     }
-    /*
-    public void testodk(int x, int y, Graphics g) {
-        for (int i = -1; i <=1; i++) {
-            for (int j = -1; j <=1; j++) {
-                if(x== 0 && y ==0) continue;
-                if(plansza[x+i][y+j].getIloscMin() == 0)
-                    g.drawImage(odkrytePole.getImage(), (x+i) * wielkoscKomorki, (y+j) * wielkoscKomorki, null);
-                    testodk(x+i,y+j,g);
-            }
-        }
-    }
-     */
 
-    public void wyswietlFLagiMiny(int i, int j, Graphics g)
-    {
-        if(plansza[j][i].getCzyJestMina())
-        {
-            g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-            return;
-        }
-        if(plansza[j][i].getCzyJestFlaga())
-        {
-            g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-            return;
-        }
-        if(!plansza[j][i].getCzyJestOdkryte())
-        {
-            g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-        }
-    }
-
-    public Boolean wyswietlPola14(int i, int j, Graphics g) {
+    public void wyswietlPola14(int i, int j, Graphics g) {
         switch (plansza[j][i].getIloscMin()) {
             case 1:
                 g.drawImage(num1.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 2:
                 g.drawImage(num2.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 3:
                 g.drawImage(num3.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 4:
                 g.drawImage(num4.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
         }
-        return false;
     }
 
-    public Boolean wyswietlPola58(int i, int j, Graphics g) {
+    public void wyswietlPola58(int i, int j, Graphics g) {
         switch (plansza[j][i].getIloscMin()) {
             case 5:
                 g.drawImage(num5.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 6:
                 g.drawImage(num6.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 7:
                 g.drawImage(num7.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
             case 8:
                 g.drawImage(num8.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                return true;
+                break;
         }
-        return false;
-    }
-
-    public void Miny(Graphics g)
-    {
-        if (plansza[myszkaX][myszkaY].getCzyJestMina())
-            g.drawImage(mina.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
-        repaint();
     }
 
     public void tworzenieFlag(Graphics g)
@@ -143,8 +111,13 @@ public class Panel extends JPanel implements MouseListener {
             pierwRuch = false;
 
         }
-
-        plansza[myszkaX][myszkaY].odkryjPole();
+        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
+            plansza[myszkaX][myszkaY].odkryjPole();
+            if(plansza[myszkaX][myszkaY].getCzyJestMina())
+                Gra = false;
+        }
+        if (e.getModifiers()  == MouseEvent.BUTTON3_MASK)
+            plansza[myszkaX][myszkaY].zmienFlage();
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
     }
