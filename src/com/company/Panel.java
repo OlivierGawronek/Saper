@@ -27,7 +27,6 @@ public class Panel extends JPanel implements MouseListener {
 
     static boolean pierwRuch = true;
     static boolean Gra = false;
-    static boolean rightClick = false;
 
     public Panel(){
         addMouseListener(this);
@@ -38,14 +37,12 @@ public class Panel extends JPanel implements MouseListener {
         super.paintComponent(g);
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
-                    //if(plansza[j][i].getCzyJestMina()) g.drawImage(mina.getImage(), j* wielkoscKomorki, i * wielkoscKomorki, null);
                     g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 }
             }
 
-
         Miny(g);
-        tworzenieFlag(g);
+        //tworzenieFlag(g);
 
         repaint();
     }
@@ -62,8 +59,6 @@ public class Panel extends JPanel implements MouseListener {
     {
         if(!plansza[myszkaX][myszkaY].getCzyJestFlaga() && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && !plansza[myszkaX][myszkaY].getCzyJestMina()) {
             g.drawImage(flaga.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
-            //System.out.println("PRAWY");
-            rightClick = !rightClick;
             plansza[myszkaX][myszkaY].zmienFlage();
             repaint();
         }
@@ -83,11 +78,6 @@ public class Panel extends JPanel implements MouseListener {
             LosowanieMin(myszkaX, myszkaY);
             pierwRuch = !pierwRuch;
         }
-
-        if (SwingUtilities.isRightMouseButton(e)) {
-            rightClick = true;
-        }
-
 
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
