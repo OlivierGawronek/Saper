@@ -27,6 +27,11 @@ public class Pole {
         this.iloscMin = iloscMin;
     }
 
+    public void zmiekszIloscMin()
+    {
+        iloscMin++;
+    }
+
     public Boolean getCzyJestMina() {
         return czyJestMina;
     }

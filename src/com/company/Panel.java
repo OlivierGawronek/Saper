@@ -38,7 +38,7 @@ public class Panel extends JPanel implements MouseListener {
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
                     //g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                    wyswietlPola(i,j,g);
+                    if (!wyswietlPola(i,j,g))
                     wyswietlFLagiMiny(i,j,g);
                 }
             }
@@ -63,34 +63,55 @@ public class Panel extends JPanel implements MouseListener {
 
     public void wyswietlFLagiMiny(int i, int j, Graphics g)
     {
-        if(!plansza[i][j].getCzyJestOdkryte())
-        {
-            g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-        }
         if(plansza[i][j].getCzyJestMina())
         {
             g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+            return;
         }
         if(plansza[i][j].getCzyJestFlaga())
         {
             g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+            return;
+        }
+        if(!plansza[i][j].getCzyJestOdkryte())
+        {
+            g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
         }
     }
 
-    public void wyswietlPola(int i, int j, Graphics g) {
-        switch (plansza[i][j].getIloscMin()) {
-            case 0:
+    public Boolean wyswietlPola(int i, int j, Graphics g) {
+        switch (plansza[j][i].getIloscMin()) {
+            /* 0:
                 g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                break;
+                return true;*/
             case 1:
                 g.drawImage(num1.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                break;
+                return true;
             case 2:
                 g.drawImage(num2.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                break;
+                return true;
+            case 3:
+                g.drawImage(num3.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
+            case 4:
+                g.drawImage(num4.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
+            case 5:
+                g.drawImage(num5.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
+            case 6:
+                g.drawImage(num6.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
+            case 7:
+                g.drawImage(num7.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
+            case 8:
+                g.drawImage(num8.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
+                return true;
             default:
                 break;
         }
+        return false;
     }
 
     public void Miny(Graphics g)
