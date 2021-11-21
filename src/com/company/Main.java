@@ -44,9 +44,12 @@ public class Main {
     public static void odkrywaniePol(int x, int y)
     {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
-        if(!plansza[x][y].getCzyJestOdkryte()){ plansza[x][y].odkryjPole();}
         if(plansza[x][y].getIloscMin() != 0) {return;}
         if(!plansza[x][y].czyPoleIstnieje(x, y)){return;}
+
+        if(x<0 || x > szerokoscPlanszy || y < 0 || y >wysokoscPlanszy){return;}
+        /*
+>>>>>>> ca4a230 (poprawa metody grupa 2)
         odkrywaniePol(x-1,y);
         odkrywaniePol(x+1,y);
         odkrywaniePol(x,y-1);
@@ -55,7 +58,13 @@ public class Main {
         odkrywaniePol(x-1,y+1);
         odkrywaniePol(x+1,y-1);
         odkrywaniePol(x+1,y+1);
-        odkrywaniePol(x,y);
+         */
+        for (int i = -1; i <=1; i++) {
+            for (int j = -1; j <=1; j++) {
+                if(x== 0 && y ==0) continue;
+                odkrywaniePol(x+i,y+j);
+            }
+        }
     }
 
     public static void LosowanieMin(int x, int y) {
