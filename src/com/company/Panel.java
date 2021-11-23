@@ -105,6 +105,7 @@ public class Panel extends JPanel implements MouseListener {
 
         if(pierwRuch)
         {
+            Timer();
             Gra = true;
             LosowanieMin(myszkaX, myszkaY);
             obliczanieWartosci();
@@ -120,6 +121,8 @@ public class Panel extends JPanel implements MouseListener {
             plansza[myszkaX][myszkaY].zmienFlage();
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
+
+
     }
 
     @Override

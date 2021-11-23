@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthColorChooserUI;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -114,7 +116,7 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         JFrame saper = new JFrame();
         Panel panel = new Panel();
         saper.add(panel);
@@ -125,16 +127,18 @@ public class Main {
         saper.setVisible(true);
         saper.setResizable(false);
         UtworzeniePolPlanszy();
+        JLabel label1 = new JLabel();
+        label1.setFont(new Font("Verdana",1,20));
+        label1.setText("0");
 
+        panel.add(label1);
 
-        /*
-        for (int i = 0; i < szerokoscPlanszy; i++) {
-            for (int j = 0; j < wysokoscPlanszy; j++) {
-                LosowanieMin(i, j);
-            }
+        Thread watek = new Thread();
+
+        for (int i = 1; i < 1000; i++) {
+            watek.sleep(1000);
+            label1.setText(String.valueOf(i));
         }
-        */
-
 
     }
 
