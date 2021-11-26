@@ -105,18 +105,24 @@ public class Panel extends JPanel implements MouseListener {
 
         if(pierwRuch)
         {
-            Timer();
+            //Timer();
             Gra = true;
             LosowanieMin(myszkaX, myszkaY);
             obliczanieWartosci();
             pierwRuch = false;
 
         }
+        //CzyPrzegrana(myszkaX, myszkaY);
         if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
             plansza[myszkaX][myszkaY].odkryjPole();
-            if(plansza[myszkaX][myszkaY].getCzyJestMina())
+            if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
                 Gra = false;
+                przegrana = true;
+            } else {
+                OdkrytePola++;
+            }
         }
+        CzyWygrana();
         if (e.getModifiers()  == MouseEvent.BUTTON3_MASK)
             plansza[myszkaX][myszkaY].zmienFlage();
 
