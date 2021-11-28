@@ -38,9 +38,9 @@ public class Main {
     }
     public static void odkrywaniePol(int x, int y)
     {
-
-        if(plansza[x][y].getCzyJestOdkryte() || plansza[x][y].getCzyJestMina()) {return;}
+        if(plansza[x][y].getCzyJestOdkryte()) {return;}
         plansza[x][y].odkryjPole();
+        OdkrytePola++;
         if(plansza[x][y].getIloscMin() != 0) {return;}
 
         for (int i = -1; i <=1; i++) {
@@ -48,8 +48,10 @@ public class Main {
                 if(x== 0 && y ==0) continue;
                 if (Pole.czyPoleIstnieje(x+i, y+j))
                     odkrywaniePol(x+i,y+j);
+
             }
         }
+
     }
 
     public static void LosowanieMin(int x, int y) {
@@ -99,55 +101,24 @@ public class Main {
     }
 
     public static void CzyPrzegrana(int x, int y){
-        if(plansza[x][y].getCzyJestMina() && !plansza[x][y].getCzyJestFlaga()) {
+        if(plansza[x][y].getCzyJestMina() && plansza[x][y].getCzyJestFlaga() == false) {
             przegrana = true;
         }
     }
 
     public static void CzyWygrana() {
-        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy && !przegrana) {
+        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy - iloscMin && przegrana == false) {
             wygrana = true;
         }
     }
-    public static void pole9x9() throws InterruptedException
-    {
-        Gra gra = new Gra(9,9,10);
-    }
-    public static void pole16x16() throws InterruptedException
-    {
-        Gra gra = new Gra(16,16,40);
-    }
-    public static void pole30x16() throws InterruptedException
-    {
-        Gra gra = new Gra(30,16,99);
-    }
-    public static void poleCustome() throws InterruptedException
-    {
-        int szerokosc = 0;
-        int wysokosc = 0;
-        int liczba_min = 0;
-        Scanner sc = new Scanner(System.in);
-        while(1 == 1) {
-            System.out.println("Jaką chcesz szerokosc? :");
-            szerokosc = sc.nextInt();
-            System.out.println("Jaką chcesz wysokosc? :");
-            wysokosc = sc.nextInt();
-            System.out.println("Ile min chcesz? :");
-            liczba_min = sc.nextInt();
-            if ((liczba_min > 0 && szerokosc > 0 && wysokosc > 0) && wysokosc * szerokosc > liczba_min) {
-                Gra gra = new Gra(szerokosc, wysokosc, liczba_min);
-                continue;
-            } else System.out.println("Podane złe wartości, spróbuj jeszcze raz!");
-        }
-    }
+
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         //OdczytZPliku();
         //ZapisDoPliku();
 
         //JFrame od wyboru gry
         //On wywoluje Gra gra = new Gra();
-        //Gra gra = new Gra(9,9,10);
-        pole9x9();
+        Gra gra = new Gra(9,9,10);
     }
 
 }
