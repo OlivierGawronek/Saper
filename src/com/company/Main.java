@@ -1,8 +1,5 @@
 package com.company;
 
-import javax.swing.*;
-import javax.swing.plaf.synth.SynthColorChooserUI;
-import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -15,7 +12,7 @@ public class Main {
     public static int szerokoscPlanszy = 9;
     public static int wysokoscPlanszy = 9;
     public static int iloscMin = 10;
-    public static int wielkoscKomorki = 30;
+    public final static int wielkoscKomorki = 30;
     public static int OdkrytePola = 0;
 
     public static Pole[][] plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
@@ -119,38 +116,17 @@ public class Main {
     }
 
     public static void CzyWygrana() {
-        if(OdkrytePola == 71 && przegrana == false) {
+        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy && przegrana == false) {
             wygrana = true;
         }
     }
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        OdczytZPliku();
-        JFrame saper = new JFrame();
-        Panel panel = new Panel();
-        saper.add(panel);
-        panel.setSize(szerokoscPlanszy*wielkoscKomorki, (wysokoscPlanszy+1)*wielkoscKomorki);
-        saper.setTitle("Saper");
-        saper.setBounds(560, 100, szerokoscPlanszy * wielkoscKomorki + 16, (wysokoscPlanszy + 1) * wielkoscKomorki + 16 + 23);
-        saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        saper.setVisible(true);
-        saper.setResizable(false);
-        UtworzeniePolPlanszy();
-        JLabel label1 = new JLabel();
-        label1.setFont(new Font("Verdana",1,20));
-        label1.setText("0");
+        //OdczytZPliku();
+        //ZapisDoPliku();
 
-        panel.add(label1);
-
-        Thread timer = new Thread();
-
-        while(przegrana == false && wygrana == false) {
-            timer.sleep(1000);
-            Time++;
-            label1.setText(String.valueOf(Time));
-        }
-        ZapisDoPliku();
-
+        //JFrame od wyboru gry
+        Gra gra = new Gra();
     }
 
 }
