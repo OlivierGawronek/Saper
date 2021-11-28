@@ -129,6 +129,7 @@ public class Main {
         menu.setVisible(true);
         menu.setResizable(false);
 
+        //Timer
         while (przegrana == false && wygrana == false) {
             try {
                 Thread.sleep(1000);

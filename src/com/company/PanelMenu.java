@@ -9,7 +9,6 @@ import static com.company.Main.*;
 public class PanelMenu extends JPanel{
 
     public PanelMenu(){
-
     }
 
     int n = 0;
