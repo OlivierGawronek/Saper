@@ -113,7 +113,7 @@ public class Panel extends JPanel implements MouseListener {
 
         }
         //CzyPrzegrana(myszkaX, myszkaY);
-        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
+        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && Gra) {
             odkrywaniePol(myszkaX, myszkaY);
             if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
                 Gra = false;
@@ -123,7 +123,7 @@ public class Panel extends JPanel implements MouseListener {
             }
         }
         CzyWygrana();
-        if (e.getModifiers()  == MouseEvent.BUTTON3_MASK)
+        if (e.getModifiers()  == MouseEvent.BUTTON3_MASK && Gra)
             plansza[myszkaX][myszkaY].zmienFlage();
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
