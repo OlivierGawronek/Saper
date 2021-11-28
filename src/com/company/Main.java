@@ -15,30 +15,26 @@ public class Main {
     public static int wysokoscPlanszy = 9;
     public static int iloscMin = 10;
     public static int wielkoscKomorki = 30;
+    public static int OdkrytePola = 0;
 
     public static Pole[][] plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
 
-    public static long StartTime;
-    public static long EndTime;
-    public static long TimeDifference;
-    public static long NajWynik;
+    public static int NajWynik;
+    public static int Time;
+    public static Boolean przegrana = false;
+    public static Boolean wygrana = false;
 
-    public static void Timer(){
-        StartTime = System.currentTimeMillis(); // wykonywane po rozpoczęciu rozgrywki (nie po uruchomieniu programu)
-        EndTime = System.currentTimeMillis(); // wykonywane po wygraniu
-        TimeDifference = (EndTime - StartTime) / 1000; // podzielone przez 1000, aby byly to sekundy
-    }
 
     public static void OdczytZPliku() throws FileNotFoundException {
         File plik = new File("NajlepszeWyniki.txt");
         Scanner in = new Scanner(plik);
-        NajWynik = in.nextLong();
+        NajWynik = in.nextInt();
     }
 
     public static void ZapisDoPliku() throws FileNotFoundException {
-        if (TimeDifference < NajWynik) {
+        if (Time < NajWynik && wygrana) {
             PrintWriter out = new PrintWriter("NajlepszeWyniki.txt");
-            out.println(TimeDifference);
+            out.println(Time);
             out.close();
         }
     }
@@ -115,7 +111,20 @@ public class Main {
         }
     }
 
+    public static void CzyPrzegrana(int x, int y){
+        if(plansza[x][y].getCzyJestMina() && plansza[x][y].getCzyJestFlaga() == false) {
+            przegrana = true;
+        }
+    }
+
+    public static void CzyWygrana() {
+        if(OdkrytePola == 71 && przegrana == false) {
+            wygrana = true;
+        }
+    }
+
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+        OdczytZPliku();
         JFrame saper = new JFrame();
         Panel panel = new Panel();
         saper.add(panel);
@@ -132,12 +141,14 @@ public class Main {
 
         panel.add(label1);
 
-        Thread watek = new Thread();
+        Thread timer = new Thread();
 
-        for (int i = 1; i < 1000; i++) {
-            watek.sleep(1000);
-            label1.setText(String.valueOf(i));
+        while(przegrana == false && wygrana == false) {
+            timer.sleep(1000);
+            Time++;
+            label1.setText(String.valueOf(Time));
         }
+        ZapisDoPliku();
 
     }
 

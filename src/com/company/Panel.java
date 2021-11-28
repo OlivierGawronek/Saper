@@ -35,7 +35,6 @@ public class Panel extends JPanel implements MouseListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        /*
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
                     g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
@@ -43,7 +42,6 @@ public class Panel extends JPanel implements MouseListener {
                         g.drawImage(odkrytePole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                         wyswietlPola14(i, j, g);
                         wyswietlPola58(i, j, g);
-                       // odkrywanie(i,j,g);
                     }
                     else if (plansza[j][i].getCzyJestFlaga())
                         g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
@@ -51,45 +49,7 @@ public class Panel extends JPanel implements MouseListener {
                         g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 }
             }
-         */
-        rysujPlansze(g);
         repaint();
-    }
-
-    public void odkrywanie(int x, int y)
-    {
-        if(plansza[x][y].getCzyJestOdkryte()){return;}
-        if(!plansza[x][y].getCzyJestMina() && !plansza[x][y].getCzyJestOdkryte()){plansza[x][y].odkryjPole();}
-        if(!Pole.czyPoleIstnieje(x, y)){return;}
-        if(plansza[x][y].getIloscMin() !=0)
-            for (int i = -1; i <=1; i++) {
-                for (int j = -1; j <=1; j++) {
-                    if(x== 0 && y ==0) continue;
-                    if(Pole.czyPoleIstnieje(x+i,y+j)) {
-                        odkrywanie(x + i, y + j);
-                    }
-                }
-            }
-
-
-
-    }
-    public void rysujPlansze(Graphics g)
-    {
-        for (int i = 0; i < szerokoscPlanszy; i++) {
-            for (int j = 0; j < wysokoscPlanszy; j++) {
-                if(plansza[j][i].getCzyJestOdkryte())
-                {
-                    if(plansza[j][i].getIloscMin() == 0){ g.drawImage(odkrytePole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);}
-                    else {wyswietlPola14(i,j,g); wyswietlPola58(i,j,g);}
-                }
-                if(!plansza[j][i].getCzyJestOdkryte()){g.drawImage(pole.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);}
-                if (!Gra && !pierwRuch && plansza[j][i].getCzyJestMina())
-                    g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                if (plansza[j][i].getCzyJestFlaga())
-                    g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-            }
-        }
     }
 
     public void wyswietlPola14(int i, int j, Graphics g) {
@@ -139,24 +99,30 @@ public class Panel extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         myszkaX = e.getX()/wielkoscKomorki;
         myszkaY = e.getY()/wielkoscKomorki;
+
         if(myszkaX > szerokoscPlanszy - 1) myszkaX = szerokoscPlanszy-1;
         if(myszkaY > wysokoscPlanszy - 1) myszkaY = wysokoscPlanszy-1;
 
         if(pierwRuch)
         {
-            Timer();
+            //Timer();
             Gra = true;
             LosowanieMin(myszkaX, myszkaY);
             obliczanieWartosci();
             pierwRuch = false;
 
         }
-        odkrywanie(myszkaX,myszkaY);
+        //CzyPrzegrana(myszkaX, myszkaY);
         if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
             plansza[myszkaX][myszkaY].odkryjPole();
-            if(plansza[myszkaX][myszkaY].getCzyJestMina())
+            if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
                 Gra = false;
+                przegrana = true;
+            } else {
+                OdkrytePola++;
+            }
         }
+        CzyWygrana();
         if (e.getModifiers()  == MouseEvent.BUTTON3_MASK)
             plansza[myszkaX][myszkaY].zmienFlage();
 
