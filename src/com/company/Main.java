@@ -67,7 +67,7 @@ public class Main {
     public static void LosowanieMin(int x, int y) {
         // x, y - wspolrzedne miejsca w ktore sie kliknie zamienione odpowiednio
         int licznik = 0;
-        Random rand = new Random(1);
+        Random rand = new Random();
         int tempx = 0;
         int tempy = 0;
         while (licznik < iloscMin) {
