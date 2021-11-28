@@ -49,7 +49,6 @@ public class Main {
                     odkrywaniePol(x+i,y+j);
             }
         }
-
     }
 
     public static void LosowanieMin(int x, int y) {
@@ -99,24 +98,55 @@ public class Main {
     }
 
     public static void CzyPrzegrana(int x, int y){
-        if(plansza[x][y].getCzyJestMina() && plansza[x][y].getCzyJestFlaga() == false) {
+        if(plansza[x][y].getCzyJestMina() && !plansza[x][y].getCzyJestFlaga()) {
             przegrana = true;
         }
     }
 
     public static void CzyWygrana() {
-        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy && przegrana == false) {
+        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy && !przegrana) {
             wygrana = true;
         }
     }
-
+    public static void pole9x9() throws InterruptedException
+    {
+        Gra gra = new Gra(9,9,10);
+    }
+    public static void pole16x16() throws InterruptedException
+    {
+        Gra gra = new Gra(16,16,40);
+    }
+    public static void pole30x16() throws InterruptedException
+    {
+        Gra gra = new Gra(30,16,99);
+    }
+    public static void poleCustome() throws InterruptedException
+    {
+        int szerokosc = 0;
+        int wysokosc = 0;
+        int liczba_min = 0;
+        Scanner sc = new Scanner(System.in);
+        while(1 == 1) {
+            System.out.println("Jaką chcesz szerokosc? :");
+            szerokosc = sc.nextInt();
+            System.out.println("Jaką chcesz wysokosc? :");
+            wysokosc = sc.nextInt();
+            System.out.println("Ile min chcesz? :");
+            liczba_min = sc.nextInt();
+            if ((liczba_min > 0 && szerokosc > 0 && wysokosc > 0) && wysokosc * szerokosc > liczba_min) {
+                Gra gra = new Gra(szerokosc, wysokosc, liczba_min);
+                continue;
+            } else System.out.println("Podane złe wartości, spróbuj jeszcze raz!");
+        }
+    }
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         //OdczytZPliku();
         //ZapisDoPliku();
 
         //JFrame od wyboru gry
         //On wywoluje Gra gra = new Gra();
-        Gra gra = new Gra(9,9,10);
+        //Gra gra = new Gra(9,9,10);
+        pole30x16();
     }
 
 }
