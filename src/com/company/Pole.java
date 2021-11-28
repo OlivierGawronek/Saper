@@ -5,7 +5,6 @@ import static com.company.Main.*;
 public class Pole {
 
     private int iloscMin = 0;
-
     private Boolean czyJestMina = false;
     private Boolean czyJestFlaga = false;
     private Boolean czyJestOdkryte = false;

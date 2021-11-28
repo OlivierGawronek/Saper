@@ -119,7 +119,6 @@ public class Panel extends JPanel implements MouseListener {
                 Gra = false;
                 przegrana = true;
             } else {
-                OdkrytePola++;
             }
         }
         CzyWygrana();
@@ -127,6 +126,7 @@ public class Panel extends JPanel implements MouseListener {
             plansza[myszkaX][myszkaY].zmienFlage();
 
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
+        System.out.println(OdkrytePola);
 
 
     }

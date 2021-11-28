@@ -41,6 +41,7 @@ public class Main {
     {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
         plansza[x][y].odkryjPole();
+        OdkrytePola++;
         if(plansza[x][y].getIloscMin() != 0) {return;}
 
         for (int i = -1; i <=1; i++) {
@@ -48,6 +49,7 @@ public class Main {
                 if(x== 0 && y ==0) continue;
                 if (Pole.czyPoleIstnieje(x+i, y+j))
                     odkrywaniePol(x+i,y+j);
+
             }
         }
 
@@ -106,7 +108,7 @@ public class Main {
     }
 
     public static void CzyWygrana() {
-        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy && przegrana == false) {
+        if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy - iloscMin && przegrana == false) {
             wygrana = true;
         }
     }
