@@ -38,7 +38,8 @@ public class Main {
     }
     public static void odkrywaniePol(int x, int y)
     {
-        if(plansza[x][y].getCzyJestOdkryte()) {return;}
+
+        if(plansza[x][y].getCzyJestOdkryte() || plansza[x][y].getCzyJestMina()) {return;}
         plansza[x][y].odkryjPole();
         if(plansza[x][y].getIloscMin() != 0) {return;}
 
@@ -146,7 +147,7 @@ public class Main {
         //JFrame od wyboru gry
         //On wywoluje Gra gra = new Gra();
         //Gra gra = new Gra(9,9,10);
-        pole30x16();
+        pole9x9();
     }
 
 }
