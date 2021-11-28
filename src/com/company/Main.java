@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthColorChooserUI;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,23 +39,23 @@ public class Main {
             out.close();
         }
     }
-    public static void odkrywanie(int x, int y)
+    public static void odkrywaniePol(int x, int y)
     {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
         if(plansza[x][y].getIloscMin() != 0) {return;}
-        if(!Pole.czyPoleIstnieje(x, y)){return;}
+        if(!plansza[x][y].czyPoleIstnieje(x, y)){return;}
 
         if(x<0 || x > szerokoscPlanszy || y < 0 || y >wysokoscPlanszy){return;}
 
 
-        odkrywanie(x-1,y);
-        odkrywanie(x+1,y);
-        odkrywanie(x,y-1);
-        odkrywanie(x,y+1);
-        odkrywanie(x-1,y-1);
-        odkrywanie(x-1,y+1);
-        odkrywanie(x+1,y-1);
-        odkrywanie(x+1,y+1);
+        odkrywaniePol(x-1,y);
+        odkrywaniePol(x+1,y);
+        odkrywaniePol(x,y-1);
+        odkrywaniePol(x,y+1);
+        odkrywaniePol(x-1,y-1);
+        odkrywaniePol(x-1,y+1);
+        odkrywaniePol(x+1,y-1);
+        odkrywaniePol(x+1,y+1);
        /*
         for (int i = -1; i <=1; i++) {
             for (int j = -1; j <=1; j++) {
