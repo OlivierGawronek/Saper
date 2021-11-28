@@ -40,6 +40,7 @@ public class Gra {
         label1.setFont(new Font("Verdana", 1, 20));
         label1.setText("0");
         Time = 0;
+
         panel.add(label1);
     }
 
