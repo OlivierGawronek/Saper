@@ -9,11 +9,22 @@ public class Gra {
 
     public Gra () throws InterruptedException
     {
+        szerokoscPlanszy = 9;
+        wysokoscPlanszy = 9;
+        iloscMin = 9;
+        zacznijGre();
+    }
+    public Gra (int sz, int w, int m) throws InterruptedException
+    {
+        szerokoscPlanszy = sz;
+        wysokoscPlanszy = w;
+        iloscMin = m;
         zacznijGre();
     }
 
     private void zacznijGre() throws InterruptedException
     {
+        plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
         JFrame saper = new JFrame();
         Panel panel = new Panel();
         saper.add(panel);

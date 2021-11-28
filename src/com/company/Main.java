@@ -42,18 +42,6 @@ public class Main {
         plansza[x][y].odkryjPole();
         if(plansza[x][y].getIloscMin() != 0) {return;}
 
-        //if(x<0 || x > szerokoscPlanszy || y < 0 || y >wysokoscPlanszy){return;}
-
-/*
-        odkrywaniePol(x-1,y);
-        odkrywaniePol(x+1,y);
-        odkrywaniePol(x,y-1);
-        odkrywaniePol(x,y+1);
-        odkrywaniePol(x-1,y-1);
-        odkrywaniePol(x-1,y+1);
-        odkrywaniePol(x+1,y-1);
-        odkrywaniePol(x+1,y+1);*/
-
         for (int i = -1; i <=1; i++) {
             for (int j = -1; j <=1; j++) {
                 if(x== 0 && y ==0) continue;
@@ -127,7 +115,7 @@ public class Main {
         //ZapisDoPliku();
 
         //JFrame od wyboru gry
-        Gra gra = new Gra();
+        Gra gra = new Gra(9,9,10);
     }
 
 }
