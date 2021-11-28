@@ -115,6 +115,7 @@ public class Main {
         //ZapisDoPliku();
 
         //JFrame od wyboru gry
+        //On wywoluje Gra gra = new Gra();
         Gra gra = new Gra(9,9,10);
     }
 
