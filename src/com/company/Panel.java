@@ -114,7 +114,7 @@ public class Panel extends JPanel implements MouseListener {
         }
         //CzyPrzegrana(myszkaX, myszkaY);
         if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga()) {
-            plansza[myszkaX][myszkaY].odkryjPole();
+            odkrywaniePol(myszkaX, myszkaY);
             if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
                 Gra = false;
                 przegrana = true;
