@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -110,13 +111,31 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws FileNotFoundException, InterruptedException {
+    public static Gra gra;
+    public static void main(String[] args) throws FileNotFoundException {
         //OdczytZPliku();
         //ZapisDoPliku();
 
         //JFrame od wyboru gry
-        //On wywoluje Gra gra = new Gra();
-        Gra gra = new Gra(9,9,10);
+        JFrame menu = new JFrame();
+        PanelMenu panelMenu = new PanelMenu();
+        menu.add(panelMenu);
+        panelMenu.setSize(9 * wielkoscKomorki, 10 * wielkoscKomorki);
+        menu.setTitle("Menu");
+        menu.setBounds(560, 100, 9 * wielkoscKomorki + 16, 10 * wielkoscKomorki + 16 + 23);
+        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menu.setVisible(true);
+        menu.setResizable(false);
+
+        while (przegrana == false && wygrana == false) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Time++;
+            Gra.ustawTimer();
+        }
     }
 
 }
