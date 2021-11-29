@@ -35,15 +35,15 @@ public class Gra {
     }
 
     static JLabel timerLabel = new JLabel();
+    public static JFrame saper;
     public static void zacznijGre() {
         plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
-        JFrame saper = new JFrame();
+        saper = new JFrame();
         Panel panel = new Panel();
         saper.add(panel);
         panel.setSize(szerokoscPlanszy * wielkoscKomorki, (wysokoscPlanszy + 1) * wielkoscKomorki);
         saper.setTitle("Saper");
         saper.setBounds(560, 100, szerokoscPlanszy * wielkoscKomorki + 16, (wysokoscPlanszy + 1) * wielkoscKomorki + 16 + 23);
-        saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         saper.setVisible(true);
         saper.setResizable(false);
         panel.setLayout(null);

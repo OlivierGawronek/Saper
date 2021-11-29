@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-//import static com.company.Gra.*;
+import static com.company.Gra.*;
 import static com.company.Main.*;
 
 public class Panel extends JPanel implements MouseListener {
@@ -82,7 +82,8 @@ public class Panel extends JPanel implements MouseListener {
         przycisk.setBounds((szerokoscPlanszy/2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki,wielkoscKomorki, wielkoscKomorki);
         przycisk.setIcon(ktoraBuzka());
         przycisk.addActionListener(one -> {
-            System.out.println("Buźka");
+            saper.dispose();
+            Gra gra = new Gra(szerokoscPlanszy, wysokoscPlanszy, iloscMin);
         });
         return przycisk;
     }
