@@ -15,6 +15,7 @@ public class Main {
     public static int iloscMin = 10;
     public final static int wielkoscKomorki = 30;
     public static int OdkrytePola = 0;
+    public static int iloscFlag = 0;
 
     public static Pole[][] plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
 
@@ -42,6 +43,10 @@ public class Main {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
         plansza[x][y].odkryjPole();
         OdkrytePola++;
+        if(plansza[x][y].getCzyJestFlaga()){
+            plansza[x][y].zmienFlage();
+            iloscFlag--;
+        }
         if(plansza[x][y].getIloscMin() != 0) {return;}
 
         for (int i = -1; i <=1; i++) {
@@ -58,7 +63,7 @@ public class Main {
     public static void LosowanieMin(int x, int y) {
         // x, y - wspolrzedne miejsca w ktore sie kliknie zamienione odpowiednio
         int licznik = 0;
-        Random rand = new Random();
+        Random rand = new Random(10);
         int tempx = 0;
         int tempy = 0;
         while (licznik < iloscMin) {
