@@ -8,6 +8,8 @@ import static com.company.Main.*;
 
 public class PanelMenu extends JPanel{
 
+    ImageIcon logo = new ImageIcon("src/Grafika/Logo.png");
+
     public PanelMenu(){
         setLayout(null);
         add(przyciskLatwy());
@@ -19,6 +21,7 @@ public class PanelMenu extends JPanel{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(logo.getImage(), 20,0,240,120,null);
     }
 
     public static JButton przyciskLatwy(){
