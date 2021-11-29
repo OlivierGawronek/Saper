@@ -9,67 +9,48 @@ import static com.company.Main.*;
 public class PanelMenu extends JPanel{
 
     public PanelMenu(){
+        setLayout(null);
+        add(przyciskLatwy());
+        add(przyciskSredni());
+        add(przyciskTrudny());
+        add(przyciskCustom());
     }
 
-    int n = 0;
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(n == 0) {
-            add(przyciskLatwy());
-            add(przyciskSredni());
-            add(przyciskTrudny());
-            add(przyciskCustom());
-            n = 1;
-        }
     }
 
-    public static JPanel przyciskLatwy(){
-        JPanel panelDoPrzycisku = new JPanel();
-        panelDoPrzycisku.setVisible(true);
-        panelDoPrzycisku.setBounds(20, 150, 100, 50);
+    public static JButton przyciskLatwy(){
         JButton przycisk = new JButton("ŁATWY");
-        przycisk.setBounds(0, 0 , 100, 50);
-        panelDoPrzycisku.add(przycisk);
+        przycisk.setBounds(20, 150, 100, 50);
         przycisk.addActionListener(one -> {
             gra = new Gra(9,9,10);
              });
-        return panelDoPrzycisku;
+        return przycisk;
     }
 
-    public static JPanel przyciskSredni(){
-        JPanel panelDoPrzycisku = new JPanel();
-        panelDoPrzycisku.setVisible(true);
-        panelDoPrzycisku.setBounds(120, 150, 100, 50);
+    public static JButton przyciskSredni(){
         JButton przycisk = new JButton("ŚREDNI");
-        przycisk.setBounds(0, 0, 100, 50);
-        panelDoPrzycisku.add(przycisk);
+        przycisk.setBounds(150, 150, 100, 50);
         przycisk.addActionListener(one -> {
             gra = new Gra(16,16,40);
         });
-        return panelDoPrzycisku;
+        return przycisk;
     }
 
-    public static JPanel przyciskTrudny(){
-        JPanel panelDoPrzycisku = new JPanel();
-        panelDoPrzycisku.setVisible(true);
-        panelDoPrzycisku.setBounds(20, 200, 100, 50);
+    public static JButton przyciskTrudny(){
         JButton przycisk = new JButton("TRUDNY");
-        przycisk.setBounds(0, 0, 100, 50);
-        panelDoPrzycisku.add(przycisk);
+        przycisk.setBounds(20, 220, 100, 50);
         przycisk.addActionListener(one -> {
             gra = new Gra(30,16,99);
         });
-        return panelDoPrzycisku;
+        return przycisk;
     }
 
-    public static JPanel przyciskCustom(){
-        JPanel panelDoPrzycisku = new JPanel();
-        panelDoPrzycisku.setVisible(true);
-        panelDoPrzycisku.setBounds(120, 200, 100, 50);
+    public static JButton przyciskCustom(){
         JButton przycisk = new JButton("CUSTOM");
-        przycisk.setBounds(0, 0, 100, 50);
-        panelDoPrzycisku.add(przycisk);
+        przycisk.setBounds(150, 220, 100, 50);
         przycisk.addActionListener(one -> {
             Scanner sc = new Scanner(System.in);
             System.out.print("Podaj szerokość: ");
@@ -80,7 +61,7 @@ public class PanelMenu extends JPanel{
             int m = sc.nextInt();
             gra = new Gra(sz, w, m);
         });
-        return panelDoPrzycisku;
+        return przycisk;
     }
 
 }

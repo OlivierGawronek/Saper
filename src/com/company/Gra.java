@@ -34,11 +34,13 @@ public class Gra {
         saper.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         saper.setVisible(true);
         saper.setResizable(false);
+        panel.setLayout(null);
 
         UtworzeniePolPlanszy();
 
         label1.setFont(new Font("Verdana", 1, 20));
         label1.setText("0");
+        label1.setBounds((szerokoscPlanszy - 2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki, 90, 30);
         Time = 0;
 
         panel.add(label1);
