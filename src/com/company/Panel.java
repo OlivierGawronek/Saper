@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+//import static com.company.Gra.*;
 import static com.company.Main.*;
 
 public class Panel extends JPanel implements MouseListener {
@@ -30,10 +31,18 @@ public class Panel extends JPanel implements MouseListener {
     static int myszkaY = 0;
 
     static boolean pierwRuch = true;
-    static boolean Gra = false;
+    static boolean czyGraTrwa = false;
 
+    static JLabel pozostalaIloscMinLabel = new JLabel();
+
+    static JButton buzkaPrzycisk;
     public Panel(){
         addMouseListener(this);
+        setLayout(null);
+        utworzIloscMinLabel();
+        add(pozostalaIloscMinLabel);
+        buzkaPrzycisk = buzkaPrzycisk();
+        add(buzkaPrzycisk);
     }
 
     @Override
@@ -49,20 +58,41 @@ public class Panel extends JPanel implements MouseListener {
                     }
                     else if (plansza[j][i].getCzyJestFlaga())
                         g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                    if (!Gra && !pierwRuch && plansza[j][i].getCzyJestMina())
+                    if (!czyGraTrwa && !pierwRuch && plansza[j][i].getCzyJestMina())
                         g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 }
             }
-            wyswietlBuzke(1, g);
+            aktualizujIloscMin();
+            buzkaPrzycisk.setIcon(ktoraBuzka());
         repaint();
     }
 
-    private void wyswietlBuzke(int numerBuzki, Graphics g){
-        switch (numerBuzki){
-            case 1:
-                g.drawImage(buzkaNormal.getImage(), (szerokoscPlanszy/2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki, null);
-                break;
-        }
+    private void aktualizujIloscMin(){
+        pozostalaIloscMinLabel.setText(String.valueOf(iloscMin-iloscFlag));
+    }
+
+    private void utworzIloscMinLabel() {
+        pozostalaIloscMinLabel.setFont(new Font("Verdana", 1, 20));
+        pozostalaIloscMinLabel.setBounds(wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki, wielkoscKomorki * 3, wielkoscKomorki);
+        aktualizujIloscMin();
+    }
+
+    private JButton buzkaPrzycisk() {
+        JButton przycisk = new JButton();
+        przycisk.setBounds((szerokoscPlanszy/2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki,wielkoscKomorki, wielkoscKomorki);
+        przycisk.setIcon(ktoraBuzka());
+        przycisk.addActionListener(one -> {
+            System.out.println("Buźka");
+        });
+        return przycisk;
+    }
+
+    private ImageIcon ktoraBuzka(){
+        if (wygrana)
+            return buzkaWygrana;
+        else if(przegrana)
+            return buzkaPrzegrana;
+        return buzkaNormal;
     }
 
     private void wyswietlPola14(int i, int j, Graphics g) {
@@ -99,51 +129,44 @@ public class Panel extends JPanel implements MouseListener {
         }
     }
 
-    public void tworzenieFlag(Graphics g)
-    {
-        if(!plansza[myszkaX][myszkaY].getCzyJestFlaga() && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && !plansza[myszkaX][myszkaY].getCzyJestMina()) {
-            g.drawImage(flaga.getImage(), myszkaX * wielkoscKomorki, myszkaY * wielkoscKomorki, null);
-            plansza[myszkaX][myszkaY].zmienFlage();
-            repaint();
-        }
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         myszkaX = e.getX()/wielkoscKomorki;
         myszkaY = e.getY()/wielkoscKomorki;
 
+        if (!Pole.czyPoleIstnieje(myszkaX, myszkaY))
+            return;
+
         if(pierwRuch)
         {
             //Timer();
-            Gra = true;
+            czyGraTrwa = true;
+            Time = 0;
             LosowanieMin(myszkaX, myszkaY);
             obliczanieWartosci();
             pierwRuch = false;
-
         }
-        //CzyPrzegrana(myszkaX, myszkaY);
-        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && Pole.czyPoleIstnieje(myszkaX, myszkaY) && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && Gra) {
+
+        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && czyGraTrwa) {
             if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
-                Gra = false;
+                czyGraTrwa = false;
                 przegrana = true;
             } else {
                 odkrywaniePol(myszkaX, myszkaY);
             }
         }
-        CzyWygrana();
-        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && Pole.czyPoleIstnieje(myszkaX, myszkaY) && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && Gra) {
+        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa) {
             plansza[myszkaX][myszkaY].zmienFlage();
             if (plansza[myszkaX][myszkaY].getCzyJestFlaga())
                 iloscFlag++;
             else
                 iloscFlag--;
         }
+        CzyPrzegrana(myszkaX, myszkaY);
+        CzyWygrana();
         System.out.println("x: " + myszkaY + " y: " + myszkaY);
         System.out.println(OdkrytePola);
         System.out.println("F " + iloscFlag);
-
-
     }
 
     @Override

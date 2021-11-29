@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
+import static com.company.Panel.*;
+
 public class Main {
 
 
@@ -141,8 +143,10 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Time++;
-            Gra.ustawTimer();
+            if (czyGraTrwa) {
+                Time++;
+                Gra.ustawTimer();
+            }
         }
     }
 

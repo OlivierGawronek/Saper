@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import static com.company.Main.*;
+import static com.company.Panel.*;
 
 public class Gra {
 
@@ -12,6 +13,7 @@ public class Gra {
         szerokoscPlanszy = 9;
         wysokoscPlanszy = 9;
         iloscMin = 10;
+        ustawienia();
         zacznijGre();
     }
     public Gra (int sz, int w, int m)
@@ -19,10 +21,20 @@ public class Gra {
         szerokoscPlanszy = sz;
         wysokoscPlanszy = w;
         iloscMin = m;
+        ustawienia();
         zacznijGre();
     }
 
-    static JLabel label1 = new JLabel();
+    private void ustawienia(){
+        pierwRuch = true;
+        czyGraTrwa = false;
+        OdkrytePola = 0;
+        iloscFlag = 0;
+        przegrana = false;
+        wygrana = false;
+    }
+
+    static JLabel timerLabel = new JLabel();
     public static void zacznijGre() {
         plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
         JFrame saper = new JFrame();
@@ -38,15 +50,13 @@ public class Gra {
 
         UtworzeniePolPlanszy();
 
-        label1.setFont(new Font("Verdana", 1, 20));
-        label1.setText("0");
-        label1.setBounds((szerokoscPlanszy - 2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki, 90, 30);
-        Time = 0;
-
-        panel.add(label1);
+        timerLabel.setFont(new Font("Verdana", 1, 20));
+        timerLabel.setText("0");
+        timerLabel.setBounds((szerokoscPlanszy - 2) * wielkoscKomorki, wysokoscPlanszy * wielkoscKomorki, 90, 30);
+        panel.add(timerLabel);
     }
 
     public static void ustawTimer(){
-        label1.setText(String.valueOf(Time));
+        timerLabel.setText(String.valueOf(Time));
     }
 }
