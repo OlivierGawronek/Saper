@@ -148,7 +148,7 @@ public class Panel extends JPanel implements MouseListener {
             pierwRuch = false;
         }
 
-        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && czyGraTrwa) {
+        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && czyGraTrwa && !wygrana && !przegrana) {
             if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
                 czyGraTrwa = false;
                 przegrana = true;
@@ -156,7 +156,7 @@ public class Panel extends JPanel implements MouseListener {
                 odkrywaniePol(myszkaX, myszkaY);
             }
         }
-        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa) {
+        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana) {
             plansza[myszkaX][myszkaY].zmienFlage();
             if (plansza[myszkaX][myszkaY].getCzyJestFlaga())
                 iloscFlag++;
@@ -165,9 +165,14 @@ public class Panel extends JPanel implements MouseListener {
         }
         CzyPrzegrana(myszkaX, myszkaY);
         CzyWygrana();
-        System.out.println("x: " + myszkaY + " y: " + myszkaY);
-        System.out.println(OdkrytePola);
-        System.out.println("F " + iloscFlag);
+        if (wygrana){
+            for (int i = 0; i < wysokoscPlanszy; i++) {
+                for (int j = 0; j < szerokoscPlanszy; j++) {
+                    if (!plansza[j][i].getCzyJestOdkryte())
+                        plansza[j][i].zmienFlage();
+                }
+            }
+        }
     }
 
     @Override
