@@ -148,7 +148,6 @@ public class Panel extends JPanel implements MouseListener {
             pierwRuch = false;
         }
         KlikanieMyszki(e);
-        CzyPrzegrana(myszkaX, myszkaY);
         CzyWygrana();
         if (wygrana){
             czyGraTrwa = false;
@@ -169,13 +168,14 @@ public class Panel extends JPanel implements MouseListener {
             } else {
                 odkrywaniePol(myszkaX, myszkaY);
             }
+            CzyPrzegrana(myszkaX, myszkaY);
         }
         if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana) {
-            if (!plansza[myszkaX][myszkaY].getCzyJestFlaga() && iloscMin - iloscFlag > 0) {
-                plansza[myszkaX][myszkaY].zmienFlage();
+            plansza[myszkaX][myszkaY].zmienFlage();
+            if (plansza[myszkaX][myszkaY].getCzyJestFlaga())
                 iloscFlag++;
-            }
-            else if(plansza[myszkaX][myszkaY].getCzyJestFlaga()){ iloscFlag--; plansza[myszkaX][myszkaY].zmienFlage();}
+            else
+                iloscFlag--;
         }
     }
 
