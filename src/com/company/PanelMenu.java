@@ -67,10 +67,17 @@ public class PanelMenu extends JPanel{
             Scanner sc = new Scanner(System.in);
             System.out.print("Podaj szerokość: ");
             int sz = sc.nextInt();
+            if (sz < 2)
+                sz = 2;
             System.out.print("Podaj wysokość: ");
             int w = sc.nextInt();
+            if (w < 2)
+                w = 2;
             System.out.print("Podaj ilość min: ");
             int m = sc.nextInt();
+            if (m >= sz * w){
+                m=sz*w-1;
+            }
             gra = new Gra(sz, w, m);
         });
         return przycisk;
