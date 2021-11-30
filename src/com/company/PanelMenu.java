@@ -5,6 +5,7 @@ import java.awt.*;
 import java.util.Scanner;
 
 import static com.company.Main.*;
+import static com.company.Gra.*;
 
 public class PanelMenu extends JPanel{
 
@@ -28,6 +29,8 @@ public class PanelMenu extends JPanel{
         JButton przycisk = new JButton("ŁATWY");
         przycisk.setBounds(20, 150, 100, 50);
         przycisk.addActionListener(one -> {
+            if (saper != null)
+                saper.dispose();
             gra = new Gra(9,9,10);
              });
         return przycisk;
@@ -37,6 +40,8 @@ public class PanelMenu extends JPanel{
         JButton przycisk = new JButton("ŚREDNI");
         przycisk.setBounds(150, 150, 100, 50);
         przycisk.addActionListener(one -> {
+            if (saper != null)
+                saper.dispose();
             gra = new Gra(16,16,40);
         });
         return przycisk;
@@ -46,6 +51,8 @@ public class PanelMenu extends JPanel{
         JButton przycisk = new JButton("TRUDNY");
         przycisk.setBounds(20, 220, 100, 50);
         przycisk.addActionListener(one -> {
+            if (saper != null)
+                saper.dispose();
             gra = new Gra(30,16,99);
         });
         return przycisk;
@@ -55,6 +62,8 @@ public class PanelMenu extends JPanel{
         JButton przycisk = new JButton("CUSTOM");
         przycisk.setBounds(150, 220, 100, 50);
         przycisk.addActionListener(one -> {
+            if (saper != null)
+                saper.dispose();
             Scanner sc = new Scanner(System.in);
             System.out.print("Podaj szerokość: ");
             int sz = sc.nextInt();

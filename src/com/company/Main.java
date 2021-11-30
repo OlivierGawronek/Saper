@@ -137,7 +137,7 @@ public class Main {
         menu.setResizable(false);
 
         //Timer
-        while (przegrana == false && wygrana == false) {
+        while (true) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

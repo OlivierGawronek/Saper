@@ -32,6 +32,7 @@ public class Gra {
         iloscFlag = 0;
         przegrana = false;
         wygrana = false;
+        Time = 0;
     }
 
     static JLabel timerLabel = new JLabel();
