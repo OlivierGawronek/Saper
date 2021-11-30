@@ -58,7 +58,7 @@ public class Panel extends JPanel implements MouseListener {
                     }
                     else if (plansza[j][i].getCzyJestFlaga())
                         g.drawImage(flaga.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
-                    if (!czyGraTrwa && !pierwRuch && plansza[j][i].getCzyJestMina())
+                    if (!czyGraTrwa && !pierwRuch && plansza[j][i].getCzyJestMina() && przegrana)
                         g.drawImage(mina.getImage(), j * wielkoscKomorki, i * wielkoscKomorki, null);
                 }
             }
@@ -155,6 +155,7 @@ public class Panel extends JPanel implements MouseListener {
             } else {
                 odkrywaniePol(myszkaX, myszkaY);
             }
+            CzyPrzegrana(myszkaX, myszkaY);
         }
         if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana) {
             plansza[myszkaX][myszkaY].zmienFlage();
@@ -163,12 +164,12 @@ public class Panel extends JPanel implements MouseListener {
             else
                 iloscFlag--;
         }
-        CzyPrzegrana(myszkaX, myszkaY);
         CzyWygrana();
         if (wygrana){
+            czyGraTrwa = false;
             for (int i = 0; i < wysokoscPlanszy; i++) {
                 for (int j = 0; j < szerokoscPlanszy; j++) {
-                    if (!plansza[j][i].getCzyJestOdkryte())
+                    if (!plansza[j][i].getCzyJestOdkryte() && !plansza[j][i].getCzyJestFlaga())
                         plansza[j][i].zmienFlage();
                 }
             }

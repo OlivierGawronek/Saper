@@ -53,7 +53,7 @@ public class Main {
 
         for (int i = -1; i <=1; i++) {
             for (int j = -1; j <=1; j++) {
-                if(x== 0 && y ==0) continue;
+                if(i== 0 && j ==0) continue;
                 if (Pole.czyPoleIstnieje(x+i, y+j))
                     odkrywaniePol(x+i,y+j);
 
