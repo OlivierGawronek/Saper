@@ -149,6 +149,11 @@ public class Panel extends JPanel implements MouseListener {
         }
         KlikanieMyszki(e);
         CzyWygrana();
+        odkryjPoWygranej();
+    }
+
+    private void odkryjPoWygranej()
+    {
         if (wygrana){
             czyGraTrwa = false;
             for (int i = 0; i < wysokoscPlanszy; i++) {
