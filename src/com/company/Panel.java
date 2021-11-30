@@ -147,23 +147,8 @@ public class Panel extends JPanel implements MouseListener {
             obliczanieWartosci();
             pierwRuch = false;
         }
-
-        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && czyGraTrwa && !wygrana && !przegrana) {
-            if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
-                czyGraTrwa = false;
-                przegrana = true;
-            } else {
-                odkrywaniePol(myszkaX, myszkaY);
-            }
-            CzyPrzegrana(myszkaX, myszkaY);
-        }
-        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana) {
-            plansza[myszkaX][myszkaY].zmienFlage();
-            if (plansza[myszkaX][myszkaY].getCzyJestFlaga())
-                iloscFlag++;
-            else
-                iloscFlag--;
-        }
+        KlikanieMyszki(e);
+        CzyPrzegrana(myszkaX, myszkaY);
         CzyWygrana();
         if (wygrana){
             czyGraTrwa = false;
@@ -175,6 +160,25 @@ public class Panel extends JPanel implements MouseListener {
             }
         }
     }
+
+    public void KlikanieMyszki(MouseEvent e){
+        if (e.getModifiers()  == MouseEvent.BUTTON1_MASK && !plansza[myszkaX][myszkaY].getCzyJestFlaga() && czyGraTrwa && !wygrana && !przegrana) {
+            if(plansza[myszkaX][myszkaY].getCzyJestMina()) {
+                czyGraTrwa = false;
+                przegrana = true;
+            } else {
+                odkrywaniePol(myszkaX, myszkaY);
+            }
+        }
+        if (e.getModifiers() == MouseEvent.BUTTON3_MASK && !plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana) {
+            if (!plansza[myszkaX][myszkaY].getCzyJestFlaga() && iloscMin - iloscFlag > 0) {
+                plansza[myszkaX][myszkaY].zmienFlage();
+                iloscFlag++;
+            }
+            else if(plansza[myszkaX][myszkaY].getCzyJestFlaga()){ iloscFlag--; plansza[myszkaX][myszkaY].zmienFlage();}
+        }
+    }
+
 
     @Override
     public void mousePressed(MouseEvent e) {
