@@ -32,6 +32,7 @@ public class PanelMenu extends JPanel{
             if (saper != null)
                 saper.dispose();
             gra = new Gra(9,9,10);
+            JakiPoziom = "l";
              });
         return przycisk;
     }
@@ -43,6 +44,7 @@ public class PanelMenu extends JPanel{
             if (saper != null)
                 saper.dispose();
             gra = new Gra(16,16,40);
+            JakiPoziom = "s";
         });
         return przycisk;
     }
@@ -54,6 +56,7 @@ public class PanelMenu extends JPanel{
             if (saper != null)
                 saper.dispose();
             gra = new Gra(30,16,99);
+            JakiPoziom = "t";
         });
         return przycisk;
     }
@@ -79,6 +82,7 @@ public class PanelMenu extends JPanel{
                 m=sz*w-1;
             }
             gra = new Gra(sz, w, m);
+            JakiPoziom = "c";
         });
         return przycisk;
     }

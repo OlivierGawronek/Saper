@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
 
 import static com.company.Gra.*;
 import static com.company.Main.*;
@@ -148,7 +149,11 @@ public class Panel extends JPanel implements MouseListener {
             pierwRuch = false;
         }
         KlikanieMyszki(e);
-        CzyWygrana();
+        try {
+            CzyWygrana();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
         odkryjPoWygranej();
     }
 

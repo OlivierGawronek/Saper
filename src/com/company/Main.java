@@ -19,10 +19,14 @@ public class Main {
     public final static int wielkoscKomorki = 30;
     public static int OdkrytePola = 0;
     public static int iloscFlag = 0;
+    public static String JakiPoziom;
 
     public static Pole[][] plansza = new Pole[szerokoscPlanszy][wysokoscPlanszy];
 
-    public static int NajWynik;
+    public static int NajWynikL;
+    public static int NajWynikS;
+    public static int NajWynikT;
+    public static int NajWynikC;
     public static int Time;
     public static Boolean przegrana = false;
     public static Boolean wygrana = false;
@@ -31,15 +35,39 @@ public class Main {
     public static void OdczytZPliku() throws FileNotFoundException {
         File plik = new File("NajlepszeWyniki.txt");
         Scanner in = new Scanner(plik);
-        NajWynik = in.nextInt();
+        NajWynikL = in.nextInt();
+        NajWynikS = in.nextInt();
+        NajWynikT = in.nextInt();
+        NajWynikC = in.nextInt();
     }
 
     public static void ZapisDoPliku() throws FileNotFoundException {
-        if (Time < NajWynik && wygrana) {
-            PrintWriter out = new PrintWriter("NajlepszeWyniki.txt");
-            out.println(Time);
-            out.close();
+        switch(JakiPoziom) {
+            case "l":
+                if (Time < NajWynikL) {
+                    NajWynikL = Time;
+                }
+                break;
+            case "s":
+                if (Time < NajWynikS) {
+                    NajWynikS = Time;
+                }
+                break;
+            case "t":
+                if (Time < NajWynikT) {
+                    NajWynikT = Time;
+                }
+                break;
+            case "c":
+                if (Time < NajWynikC) {
+                    NajWynikC = Time;
+                }
+                break;
         }
+        PrintWriter out = new PrintWriter("NajlepszeWyniki.txt");
+        out.println(NajWynikL + "\n" + NajWynikS + "\n" + NajWynikT + "\n" + NajWynikC);
+        out.close();
+
     }
     public static void odkrywaniePol(int x, int y)
     {
@@ -115,9 +143,11 @@ public class Main {
         }
     }
 
-    public static void CzyWygrana() {
+    public static void CzyWygrana() throws FileNotFoundException {
         if(OdkrytePola == szerokoscPlanszy*wysokoscPlanszy - iloscMin && przegrana == false) {
             wygrana = true;
+            System.out.println(Time);
+            ZapisDoPliku();
         }
     }
 
