@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.renderable.ParameterBlock;
 import java.util.Scanner;
 
 import static com.company.Main.*;
@@ -17,7 +18,9 @@ public class PanelMenu extends JPanel{
         add(przyciskSredni());
         add(przyciskTrudny());
         add(przyciskCustom());
+        add(HallOfFame());
     }
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -27,7 +30,8 @@ public class PanelMenu extends JPanel{
 
     public static JButton przyciskLatwy(){
         JButton przycisk = new JButton("ŁATWY");
-        przycisk.setBounds(20, 150, 100, 50);
+        przycisk.setBounds(20, 125, 100, 50);
+        przycisk.setBackground(Color.GREEN);
         przycisk.addActionListener(one -> {
             if (saper != null)
                 saper.dispose();
@@ -39,7 +43,8 @@ public class PanelMenu extends JPanel{
 
     public static JButton przyciskSredni(){
         JButton przycisk = new JButton("ŚREDNI");
-        przycisk.setBounds(150, 150, 100, 50);
+        przycisk.setBounds(150, 125, 100, 50);
+        przycisk.setBackground(Color.ORANGE);
         przycisk.addActionListener(one -> {
             if (saper != null)
                 saper.dispose();
@@ -51,7 +56,8 @@ public class PanelMenu extends JPanel{
 
     public static JButton przyciskTrudny(){
         JButton przycisk = new JButton("TRUDNY");
-        przycisk.setBounds(20, 220, 100, 50);
+        przycisk.setBounds(20, 185, 100, 50);
+        przycisk.setBackground(Color.RED);
         przycisk.addActionListener(one -> {
             if (saper != null)
                 saper.dispose();
@@ -63,7 +69,8 @@ public class PanelMenu extends JPanel{
 
     public static JButton przyciskCustom(){
         JButton przycisk = new JButton("CUSTOM");
-        przycisk.setBounds(150, 220, 100, 50);
+        przycisk.setBounds(150, 185, 100, 50);
+        przycisk.setBackground(Color.cyan);
         przycisk.addActionListener(one -> {
             if (saper != null)
                 saper.dispose();
@@ -83,6 +90,28 @@ public class PanelMenu extends JPanel{
             }
             gra = new Gra(sz, w, m);
             JakiPoziom = "c";
+        });
+        return przycisk;
+    }
+
+
+    public static JFrame HOF = new JFrame();
+    public static JButton HallOfFame(){
+        JButton przycisk = new JButton("HALL OF FAME");
+        przycisk.setBounds(20, 240, 230, 50);
+        przycisk.setBackground(Color.DARK_GRAY);
+        przycisk.setForeground(Color.YELLOW);
+        przycisk.addActionListener(one -> {
+            if(!HOF.isActive()) HOF.dispose();
+            HOF = new JFrame();
+            HallOfFame hallOfFame = new HallOfFame();
+            HOF.add(hallOfFame);
+            HOF.setTitle("HALL OF FAME");
+            HOF.setBounds(0, 0, 270 + 16, 300 + 16 + 23);
+            HOF.setLocationRelativeTo(null);
+            HOF.setVisible(true);
+            HOF.setResizable(false);
+            hallOfFame.setLayout(null);
         });
         return przycisk;
     }
