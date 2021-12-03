@@ -45,6 +45,7 @@ public class Gra {
         panel.setSize(szerokoscPlanszy * wielkoscKomorki, (wysokoscPlanszy + 1) * wielkoscKomorki);
         saper.setTitle("Saper");
         saper.setBounds(560, 100, szerokoscPlanszy * wielkoscKomorki + 16, (wysokoscPlanszy + 1) * wielkoscKomorki + 16 + 23);
+        saper.setLocationRelativeTo(null);
         saper.setVisible(true);
         saper.setResizable(false);
         panel.setLayout(null);

@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -122,8 +123,7 @@ public class Main {
 
     public static Gra gra;
     public static void main(String[] args) throws FileNotFoundException {
-        //OdczytZPliku();
-        //ZapisDoPliku();
+        OdczytZPliku();
 
         //JFrame od wyboru gry
         JFrame menu = new JFrame();
@@ -131,7 +131,8 @@ public class Main {
         menu.add(panelMenu);
         panelMenu.setSize(9 * wielkoscKomorki, 10 * wielkoscKomorki);
         menu.setTitle("Menu");
-        menu.setBounds(560, 100, 9 * wielkoscKomorki + 16, 10 * wielkoscKomorki + 16 + 23);
+        menu.setBounds(0, 0, 9 * wielkoscKomorki + 16, 10 * wielkoscKomorki + 16 + 23);
+        menu.setLocationRelativeTo(null);
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setVisible(true);
         menu.setResizable(false);
