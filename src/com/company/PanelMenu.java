@@ -105,6 +105,11 @@ public class PanelMenu extends JPanel{
         przycisk.setForeground(Color.YELLOW);
         przycisk.addActionListener(one -> {
             if(!HOF.isActive()) HOF.dispose();
+            try {
+                OdczytZPliku();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             HOF = new JFrame();
             HallOfFame hallOfFame = new HallOfFame();
             HOF.add(hallOfFame);
@@ -114,6 +119,7 @@ public class PanelMenu extends JPanel{
             HOF.setVisible(true);
             HOF.setResizable(false);
             hallOfFame.setLayout(null);
+
         });
         return przycisk;
     }

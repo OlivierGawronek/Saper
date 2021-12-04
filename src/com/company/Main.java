@@ -41,6 +41,13 @@ public class Main {
             NajWynikT = in.nextInt();
             NajWynikC = in.nextInt();
         }
+        else
+        {
+            NajWynikL = 0;
+            NajWynikS = 0;
+            NajWynikT = 0;
+            NajWynikC = 0;
+        }
     }
 
     public static void ZapisDoPliku() throws FileNotFoundException {
@@ -164,7 +171,7 @@ public class Main {
 
     public static Gra gra;
     public static void main(String[] args) throws FileNotFoundException {
-        OdczytZPliku();
+
 
         //JFrame od wyboru gry
         JFrame menu = new JFrame();

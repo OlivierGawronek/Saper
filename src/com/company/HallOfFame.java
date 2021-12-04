@@ -27,12 +27,12 @@ public class HallOfFame extends JPanel {
         przycisk.addActionListener(one -> {
             if(!wyn.isActive()) wyn.dispose();
             JLabel wyntxt = new JLabel();
-            wyn.setBounds(0, 0, 20 + 16, 40 + 16 + 23);
+            wyn.setBounds(0, 0, 200 + 16, 40 + 16 + 23);
             wyn.setLocationRelativeTo(null);
             wyn.setVisible(true);
             wyn.setResizable(false);
             wyntxt.setFont(new Font("Verdana", 1, 20));
-            wyntxt.setText(String.valueOf(NajWynikL));
+            wyntxt.setText(String.valueOf("LATWY: " + NajWynikL));
             wyntxt.setBounds(270, 270, 90, 30);
             wyn.add(wyntxt);
         });
@@ -46,12 +46,12 @@ public class HallOfFame extends JPanel {
         przycisk.addActionListener(one -> {
             if(wyn.isActive()) wyn.dispose();
             JLabel wyntxt = new JLabel();
-            wyn.setBounds(0, 0, 20 + 16, 40 + 16 + 23);
+            wyn.setBounds(0, 0, 200 + 16, 40 + 16 + 23);
             wyn.setLocationRelativeTo(null);
             wyn.setVisible(true);
             wyn.setResizable(false);
             wyntxt.setFont(new Font("Verdana", 1, 20));
-            wyntxt.setText(String.valueOf(NajWynikS));
+            wyntxt.setText(String.valueOf("SREDNI: " + NajWynikS));
             wyntxt.setBounds(270, 270, 90, 30);
             wyn.add(wyntxt);
         });
@@ -61,16 +61,16 @@ public class HallOfFame extends JPanel {
         JButton przycisk = new JButton("TRUDNY");
         przycisk.setBounds(20, 170, 230, 50);
         przycisk.setBackground(Color.RED);
-        final JFrame wyn = new JFrame();
+        JFrame wyn = new JFrame();
         przycisk.addActionListener(one -> {
             if(wyn.isActive()) wyn.dispose();
             JLabel wyntxt = new JLabel();
-            wyn.setBounds(0, 0, 20 + 16, 40 + 16 + 23);
+            wyn.setBounds(0, 0, 200 + 16, 40 + 16 + 23);
             wyn.setLocationRelativeTo(null);
             wyn.setVisible(true);
             wyn.setResizable(false);
             wyntxt.setFont(new Font("Verdana", 1, 20));
-            wyntxt.setText(String.valueOf(NajWynikT));
+            wyntxt.setText(String.valueOf("TRUDNY: " + NajWynikT));
             wyntxt.setBounds(270, 270, 90, 30);
             wyn.add(wyntxt);
         });
@@ -84,12 +84,12 @@ public class HallOfFame extends JPanel {
         przycisk.addActionListener(one -> {
             JLabel wyntxt = new JLabel();
             if(wyn.isActive()) wyn.dispose();
-            wyn.setBounds(0, 0, 20 + 16, 40 + 16 + 23);
+            wyn.setBounds(0, 0, 200 + 16, 40 + 16 + 23);
             wyn.setLocationRelativeTo(null);
             wyn.setVisible(true);
             wyn.setResizable(false);
             wyntxt.setFont(new Font("Verdana", 1, 20));
-            wyntxt.setText(String.valueOf(NajWynikC));
+            wyntxt.setText(String.valueOf("CUSTOM: " + NajWynikC));
             wyntxt.setBounds(270, 270, 90, 30);
             wyn.add(wyntxt);
         });
