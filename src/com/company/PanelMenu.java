@@ -3,6 +3,7 @@ package com.company;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.renderable.ParameterBlock;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static com.company.Main.*;
@@ -19,6 +20,7 @@ public class PanelMenu extends JPanel{
         add(przyciskTrudny());
         add(przyciskCustom());
         add(HallOfFame());
+        add(przyciskResetHOF());
     }
 
 
@@ -97,8 +99,8 @@ public class PanelMenu extends JPanel{
 
     public static JFrame HOF = new JFrame();
     public static JButton HallOfFame(){
-        JButton przycisk = new JButton("HALL OF FAME");
-        przycisk.setBounds(20, 240, 230, 50);
+        JButton przycisk = new JButton("HOF");
+        przycisk.setBounds(20, 240, 100, 50);
         przycisk.setBackground(Color.DARK_GRAY);
         przycisk.setForeground(Color.YELLOW);
         przycisk.addActionListener(one -> {
@@ -115,5 +117,22 @@ public class PanelMenu extends JPanel{
         });
         return przycisk;
     }
+
+    public static JButton przyciskResetHOF(){
+        JButton przycisk = new JButton("RESET HOF");
+        przycisk.setBounds(150, 240, 100, 50);
+        przycisk.setBackground(Color.BLACK);
+        przycisk.setForeground(Color.PINK);
+        przycisk.addActionListener(one -> {
+            try {
+                ResetPliku();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
+        return przycisk;
+    }
+
+
 
 }

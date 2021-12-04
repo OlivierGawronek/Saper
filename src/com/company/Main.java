@@ -35,10 +35,12 @@ public class Main {
     public static void OdczytZPliku() throws FileNotFoundException {
         File plik = new File("NajlepszeWyniki.txt");
         Scanner in = new Scanner(plik);
-        NajWynikL = in.nextInt();
-        NajWynikS = in.nextInt();
-        NajWynikT = in.nextInt();
-        NajWynikC = in.nextInt();
+        if(in.hasNext()) {
+            NajWynikL = in.nextInt();
+            NajWynikS = in.nextInt();
+            NajWynikT = in.nextInt();
+            NajWynikC = in.nextInt();
+        }
     }
 
     public static void ZapisDoPliku() throws FileNotFoundException {
@@ -69,6 +71,15 @@ public class Main {
         out.close();
 
     }
+
+    public static void ResetPliku() throws FileNotFoundException {
+        PrintWriter out = new PrintWriter("NajlepszeWyniki.txt");
+        out.flush();
+        out.close();
+
+    }
+
+
     public static void odkrywaniePol(int x, int y)
     {
         if(plansza[x][y].getCzyJestOdkryte()) {return;}
