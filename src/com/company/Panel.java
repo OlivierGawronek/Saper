@@ -140,14 +140,8 @@ public class Panel extends JPanel implements MouseListener {
             return;
 
         if(pierwRuch)
-        {
-            //Timer();
-            czyGraTrwa = true;
-            Time = 0;
-            LosowanieMin(myszkaX, myszkaY);
-            obliczanieWartosci();
-            pierwRuch = false;
-        }
+            jesliPierwszyRuch();
+
         KlikanieMyszki(e);
         try {
             CzyWygrana();
@@ -155,6 +149,15 @@ public class Panel extends JPanel implements MouseListener {
             ex.printStackTrace();
         }
         odkryjPoWygranej();
+    }
+
+    private void jesliPierwszyRuch(){
+        //Timer();
+        czyGraTrwa = true;
+        Time = 0;
+        LosowanieMin(myszkaX, myszkaY);
+        obliczanieWartosci();
+        pierwRuch = false;
     }
 
     private void odkryjPoWygranej()
@@ -187,8 +190,42 @@ public class Panel extends JPanel implements MouseListener {
             else
                 iloscFlag--;
         }
+        czChord(e);
     }
 
+    private void czChord(MouseEvent e){
+        if (e.getModifiers()  == MouseEvent.BUTTON2_MASK && plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana){
+            int iloscFlag = 0;
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (Pole.czyPoleIstnieje(myszkaX+i, myszkaY+j))
+                        if (plansza[myszkaX+i][myszkaY+j].getCzyJestFlaga())
+                            iloscFlag++;
+                }
+            }
+            chord(iloscFlag);
+        }
+    }
+
+    private void chord(int iloscFlag){
+        if (iloscFlag == plansza[myszkaX][myszkaY].getIloscMin()) {
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (Pole.czyPoleIstnieje(myszkaX + i, myszkaY + j)) {
+                        CzyPrzegrana(myszkaX + i, myszkaY + j);
+                        if (przegrana)
+                            czyGraTrwa = false;
+                        if (!plansza[myszkaX + i][myszkaY + j].getCzyJestOdkryte() && !plansza[myszkaX + i][myszkaY + j].getCzyJestFlaga() && !plansza[myszkaX + i][myszkaY + j].getCzyJestMina()) {
+                            if (plansza[myszkaX + i][myszkaY + j].getIloscMin() == 0)
+                                odkrywaniePol(myszkaX + i, myszkaY + j);
+                            else
+                                plansza[myszkaX + i][myszkaY + j].odkryjPole();
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
