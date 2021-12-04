@@ -190,10 +190,10 @@ public class Panel extends JPanel implements MouseListener {
             else
                 iloscFlag--;
         }
-        czChord(e);
+        czyChord(e);
     }
 
-    private void czChord(MouseEvent e){
+    private void czyChord(MouseEvent e){
         if (e.getModifiers()  == MouseEvent.BUTTON2_MASK && plansza[myszkaX][myszkaY].getCzyJestOdkryte() && czyGraTrwa && !wygrana && !przegrana){
             int iloscFlag = 0;
             for (int i = -1; i <= 1; i++) {
@@ -204,6 +204,11 @@ public class Panel extends JPanel implements MouseListener {
                 }
             }
             chord(iloscFlag);
+            try {
+                CzyWygrana();
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -218,8 +223,10 @@ public class Panel extends JPanel implements MouseListener {
                         if (!plansza[myszkaX + i][myszkaY + j].getCzyJestOdkryte() && !plansza[myszkaX + i][myszkaY + j].getCzyJestFlaga() && !plansza[myszkaX + i][myszkaY + j].getCzyJestMina()) {
                             if (plansza[myszkaX + i][myszkaY + j].getIloscMin() == 0)
                                 odkrywaniePol(myszkaX + i, myszkaY + j);
-                            else
+                            else {
                                 plansza[myszkaX + i][myszkaY + j].odkryjPole();
+                                OdkrytePola++;
+                            }
                         }
                     }
                 }

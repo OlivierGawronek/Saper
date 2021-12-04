@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
 
-import static com.company.Gra.saper;
+import static com.company.Gra.*;
 import static com.company.Main.*;
 
 public class HallOfFame extends JPanel {
