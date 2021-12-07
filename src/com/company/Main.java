@@ -43,10 +43,10 @@ public class Main {
         }
         else
         {
-            NajWynikL = 0;
-            NajWynikS = 0;
-            NajWynikT = 0;
-            NajWynikC = 0;
+            NajWynikL = 999999;
+            NajWynikS = 999999;
+            NajWynikT = 999999;
+            NajWynikC = 999999;
         }
     }
 
